@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background: linear-gradient(135deg, #2d1b4e, #1e0a2f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.container{
+    width: 350px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 15px 30px rgba(246, 129, 33, 0.2);
+    transform: translateY(-5px);
+}
+
+label, p{
+    color: #333 !important;
+    font-family: 'Poppins', sans-serif;
+}
+
+input{
+    padding: 12px 15px;
+    width: 90%;
+    border-radius: 8px;
+    color: #333;
+    border: 1px solid rgba(246, 129, 33, 0.3);
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 5px;
+}
+
+input:focus {
+    border: 1px solid rgba(246, 129, 33, 0.8);
+    box-shadow: 0 0 10px rgba(246, 129, 33, 0.2);
+    outline: none;
+}
+
+.login{
+    font-weight: 700; 
+    font-size: 24px; 
+    margin: 15px auto;
+    color: #333;
+    background: linear-gradient(90deg, rgba(246, 129, 33, 1), rgba(246, 110, 33, 1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+a{
+    color: rgba(246, 129, 33, 1);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #ff6b00;
+    text-decoration: underline;
+}
+
+.btn{
+    color: white;
+    font-weight: 600;
+    padding: 12px 30px;
+    margin: 15px 7px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(90deg, rgba(246, 129, 33, 1), rgba(246, 110, 33, 1));
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(246, 129, 33, 0.3);
+}
+
+.btn:hover {
+    background: linear-gradient(90deg, rgba(246, 110, 33, 1), rgba(246, 129, 33, 1));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(246, 129, 33, 0.4);
+}
+
+.signup-options{
+    margin: 20px auto;
+    margin-bottom: 30px;
+    border: none;
+    text-align: center;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.signup-options a{
+    display: inline-block;
+    margin: 0px 10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.signup-options a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(246, 129, 33, 0.3);
+}
+
+.signup-options a img{
+    height: 20px;
+    width: 20px;
+    margin: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+.back-box{
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    z-index: -1;
+    box-shadow: 0px 0px 30px rgba(246, 129, 33, 0.4);
+    transform: rotate(45deg);
+    overflow: hidden;
+    border-radius: 100px;
+    background-image: linear-gradient(to right, rgba(246, 129, 33, 0.8), rgba(246, 110, 33, 0.8));
+}
+
+.box1{
+    top: 290px;
+    transform: rotate(35deg);
+    left: -120px;
+}
+
+.box2{
+    top: -50px;
+    transform: rotate(35deg);
+    right: -100px;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.bold-text {
+    font-weight: bold;
+    margin-bottom: 10px;
+    
+}
+
+.image-container{
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+ul.messages {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+/* Style for individual messages */
+ul.messages li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Style for success messages */
+ul.messages li.text-success {
+    background-color: #dff0d8; /* Success message background color */
+    color: #3c763d; /* Success message text color */
+}
+ul.messages li.text-info {
+    background-color: #dff0d8; /* Success message background color */
+    color: rgb(33, 33, 161); /* Success message text color */
+}
+
+/* Style for error messages */
+ul.messages li.text-danger {
+    background-color: #f2dede; /* Error message background color */
+    color: #a94442; /* Error message text color */
+}
+
+.backline{
+    background: linear-gradient(180deg, 
+        rgba(0,0,0,0) calc(50% - 1px), 
+        rgba(192,192,192,1) calc(50%), 
+        rgba(0,0,0,0) calc(50% + 1px));
+}
+
+@media (max-width:1200px){
+    .back-box p{ 
+        height:50px; 
+    }
+}
+@media (max-width:767px){
+    .btn input{ 
+        height:40px; 
+    }
+}
+@media screen and (max-width:768px){
+    .container{
+        margin-top: 200px !important;
+    }
+    .box1, .box2{
+        display: none;
+    }
+}
+@media screen and (min-width: 768px){
+    .container{
+        width: 450px;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(5px);
+    }
+    50% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Apply the animation to the form on hover */
+.error{
+    animation: shake 0.4s;
+}
+
+input:focus + label, input:not(:placeholder-shown) + label {
+    opacity:1;
+    transform: scale(0.75) translateY(-70%) translateX(-14px);
+}
+p {
+    margin:20px 0;
+    position:relative;
+}
+
+label {
+    padding:10px 18px;
+    pointer-events: none;
+    position:absolute;
+    left:0;
+    top:0;
+    transition: 0.2s;
+    transition-timing-function: ease;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    opacity:0.5;
+    background: transparent;
+}
+
+input {
+    padding:10px;
+}
+span{
+    background-color: white;
+    padding: 0px 5px;
+    border-radius: 15px;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(246, 129, 33, 0.5);
+    animation: float 15s infinite;
+    z-index: -1;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(10px, 10px);
+    }
+    50% {
+        transform: translate(0, 20px);
+    }
+    75% {
+        transform: translate(-10px, 10px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+#particleGenerator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}

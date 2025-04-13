@@ -1,0 +1,218 @@
+# StudySync - Software Requirements Specification (SRS)
+
+## 1. Introduction
+
+StudySync is a comprehensive Learning Management Platform designed to streamline the educational experience for both students and educators. The platform provides a centralized hub for course materials, assignments, discussions, and interactive learning tools.
+
+### 1.1 Purpose
+The purpose of StudySync is to create an all-in-one platform that enhances the learning experience by providing tools for course organization, collaboration, and skill development.
+
+### 1.2 Intended Audience
+- Students seeking to organize coursework and access learning materials
+- Educators looking to create engaging learning experiences
+- Educational institutions wanting to implement a digital learning environment
+
+## 2. System Overview
+
+StudySync is a Django-based web application that offers various features to support the learning process. The system includes user authentication, course management, file sharing, discussion forums, and interactive tools like a code compiler.
+
+### 2.1 Technology Stack
+- **Backend Framework**: Django 4.2.5
+- **Frontend**: HTML, CSS, JavaScript, Bootstrap
+- **Database**: SQLite (development), PostgreSQL (production)
+- **File Storage**: Cloudinary
+- **Authentication**: Django-allauth (including Google OAuth)
+- **Additional Libraries**: Ace Editor (for code compiler), PyPDF2, img2pdf
+
+## 3. Functional Requirements
+
+### 3.1 User Management
+
+#### 3.1.1 User Registration and Authentication
+- User registration with email verification
+- Login with username/email and password
+- Google OAuth integration for social login
+- Password reset functionality with OTP verification
+- User profile management
+- Email verification system
+
+#### 3.1.2 User Roles
+- Regular users (students)
+- Admin users (educators/administrators)
+
+### 3.2 Course Management
+
+#### 3.2.1 Course Organization
+- Course creation and management (admin only)
+- Course listing and browsing
+- Course materials organized by units
+
+#### 3.2.2 File Management
+- Upload and storage of course materials
+- Support for PDF documents and presentations
+- File categorization by course code and unit
+- Built-in PDF viewer for reading documents
+
+### 3.3 Learning Resources
+
+#### 3.3.1 Presentation Viewer
+- Access and view presentation slides directly within the platform
+- No download required for viewing presentations
+
+#### 3.3.2 PDF Viewer
+- Integrated PDF viewer for reading course materials
+- Advanced reading features
+
+#### 3.3.3 Code Compiler
+- Built-in code editor with syntax highlighting
+- Support for multiple programming languages
+- Code execution and output display
+- Theme customization options
+
+### 3.4 Continuous Assessment (CA) Management
+
+#### 3.4.1 CA File Upload
+- Students can upload CA files
+- Files are associated with specific courses
+- Verification system for uploaded CA files
+
+#### 3.4.2 CA Administration
+- Admins can approve or delete CA files
+- CA files organized by course code
+
+### 3.5 Discussion Forum
+
+#### 3.5.1 Discussion Features
+- Create discussion topics
+- Add descriptions and tags to discussions
+- Upload images to discussions
+- View and vote on discussions
+
+#### 3.5.2 Community Engagement
+- Track views and votes on discussions
+- User profile integration with discussions
+
+### 3.6 Administrative Functions
+
+#### 3.6.1 Admin Panel
+- Dedicated admin interface
+- User management
+- Course management
+- File management
+- Report handling
+- Subscriber management
+
+#### 3.6.2 Analytics
+- User statistics
+- File usage analytics
+- System usage reports
+
+### 3.7 Communication
+
+#### 3.7.1 Email Notifications
+- Welcome emails
+- Verification emails
+- Password reset emails
+- OTP delivery
+
+#### 3.7.2 Subscription System
+- Email subscription for updates
+- Subscriber management
+
+### 3.8 Feedback System
+
+#### 3.8.1 Bug Reporting
+- Report bugs and issues
+- Categorize report types
+- Admin review of reports
+
+## 4. Non-Functional Requirements
+
+### 4.1 Performance
+- The system should load pages within 3 seconds
+- Support concurrent users accessing the platform
+- Efficient file storage and retrieval using Cloudinary
+
+### 4.2 Security
+- User authentication and authorization
+- Secure password storage with hashing
+- Email verification for new accounts
+- Protection against common web vulnerabilities
+- CSRF protection
+
+### 4.3 Usability
+- Responsive design for various devices
+- Intuitive navigation
+- Modern UI with Bootstrap framework
+- Interactive elements with JavaScript
+- Particle.js background for enhanced visual appeal
+
+### 4.4 Reliability
+- Error handling and user-friendly error pages
+- Data backup through Cloudinary
+- Validation of user inputs
+
+### 4.5 Scalability
+- Cloud-based file storage for scalability
+- Database design that supports growth
+
+## 5. Data Models
+
+### 5.1 User-related Models
+- User (Django's built-in User model)
+- Profile (Extended user profile with verification status)
+- User_Email_verification (Email verification details)
+
+### 5.2 Course-related Models
+- Courses (Course information)
+- files (Course materials)
+- cafiles (Continuous Assessment files)
+
+### 5.3 Communication Models
+- subscribers (Email subscribers)
+- Report (Bug and issue reports)
+
+### 5.4 Discussion Models
+- Discuss (Discussion forum posts)
+
+## 6. System Interfaces
+
+### 6.1 User Interfaces
+- Landing page
+- Login/Registration pages
+- Course browsing pages
+- File viewing interfaces
+- Code compiler interface
+- Discussion forum
+- Admin panel
+- Profile management
+
+### 6.2 External Interfaces
+- Cloudinary API for file storage
+- Google OAuth for authentication
+- Email service for notifications
+
+## 7. Constraints and Limitations
+
+### 7.1 Technical Constraints
+- Browser compatibility requirements
+- Dependency on external services (Cloudinary, Google OAuth)
+- File size limitations for uploads
+
+### 7.2 Business Constraints
+- Educational focus of the platform
+- Need for admin approval of certain content
+
+## 8. Future Enhancements
+
+- Mobile application development
+- Real-time collaboration features
+- Advanced analytics dashboard
+- Integration with other educational tools
+- Video conferencing capabilities
+- Assignment grading system
+- Calendar and scheduling features
+
+## 9. Conclusion
+
+StudySync provides a comprehensive solution for educational needs by combining course management, resource sharing, interactive learning tools, and community features in one platform. The system is designed to enhance the learning experience for students while providing educators with tools to effectively manage and distribute educational content.

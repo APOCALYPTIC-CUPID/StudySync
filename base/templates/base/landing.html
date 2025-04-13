@@ -1,0 +1,272 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} Home | StudySync {% endblock title %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/landing-enhanced.css' %}">
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="{% static 'js/enhanced-interactions.js' %}"></script>
+
+<div id="particles-js"></div>
+
+<section id="home" class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 hero-content">
+                <span class="hero-tagline">Learning Management Platform</span>
+                <h1 class="hero-title">Streamline Your Study Experience With StudySync</h1>
+                <p class="hero-description">
+                    An all-in-one platform for students and educators to manage course materials,
+                    collaborate on assignments, and enhance the learning experience.
+                </p>
+                <div class="hero-actions">
+                    <a href="#about" class="btn btn-primary">Learn More</a>
+                    <a href="/register" class="btn btn-outline">Sign Up Free</a>
+                </div>
+                <div class="feature-pills">
+                    <span><i class="fas fa-check-circle"></i> Course Organization</span>
+                    <span><i class="fas fa-check-circle"></i> Discussion Forums</span>
+                    <span><i class="fas fa-check-circle"></i> Code Practice</span>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="{% static 'images/iphone-940.png' %}" alt="StudySync Platform" class="hero-img">
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <span class="scroll-text">Scroll Down</span>
+        <i class="fas fa-chevron-down scroll-icon"></i>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="section-heading">Powerful Features</h2>
+                <p class="section-subheading">Everything you need for an enhanced learning experience</p>
+            </div>
+        </div>
+        <div class="row feature-row">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3 class="feature-title">Course Management</h3>
+                    <p class="feature-description">
+                        Organize and access your course materials, assignments, and resources in one centralized platform.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="feature-title">Discussion Forums</h3>
+                    <p class="feature-description">
+                        Engage with peers and instructors in topic-specific discussion forums to enhance understanding.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="feature-title">Code Practice</h3>
+                    <p class="feature-description">
+                        Built-in code compiler and practice environment for programming courses and assignments.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row feature-row">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <h3 class="feature-title">Presentation Viewer</h3>
+                    <p class="feature-description">
+                        Access and view presentation slides directly within the platform without downloading.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="feature-title">Assignment Management</h3>
+                    <p class="feature-description">
+                        Track, submit, and manage assignments with deadline reminders and progress tracking.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="feature-title">PDF Viewer</h3>
+                    <p class="feature-description">
+                        View PDF documents directly in your browser with advanced reading features.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about">
+    <div class="container">
+        <div class="row about-intro">
+            <div class="col-md-12 text-center">
+                <h1 class="intro-header" data-aos="fade-up">About Our Platform</h1>
+                <p data-aos="fade-up">
+                    StudySync is a comprehensive learning management platform designed to streamline the educational experience
+                    for both students and educators. Our platform provides a centralized hub for course materials, assignments,
+                    discussions, and interactive learning tools.
+                </p>
+                <p data-aos="fade-up">
+                    Whether you're a student looking to organize your coursework or an educator seeking to create engaging
+                    learning experiences, StudySync offers the tools and features you need to succeed in today's digital
+                    learning environment.
+                </p>
+            </div>
+        </div>
+
+        <div class="row about-how">
+            <div class="col-md-12 text-center">
+                <h1 class="intro-header" data-aos="fade-up">How The Platform Works</h1>
+                <div class="about-how-content" data-aos="fade-up">
+                    <ol>
+                        <li>
+                            <strong>Create An Account</strong>
+                            <p>Sign up for a free account to get started with StudySync.</p>
+                        </li>
+                        <li>
+                            <strong>Access Course Materials</strong>
+                            <p>Browse and access course materials, presentations, and resources.</p>
+                        </li>
+                        <li>
+                            <strong>Engage With The Community</strong>
+                            <p>Participate in discussions, ask questions, and collaborate with peers.</p>
+                        </li>
+                        <li>
+                            <strong>Practice Coding Skills</strong>
+                            <p>Use the built-in code compiler to practice programming concepts.</p>
+                        </li>
+                        <li>
+                            <strong>Track Progress</strong>
+                            <p>Monitor your progress and stay on top of deadlines and assignments.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Download Section -->
+<section id="download">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cta-content">
+                    <h1 data-aos="fade-up">Start Learning With StudySync Today</h1>
+                    <p data-aos="fade-up">
+                        Join thousands of students and educators who are already using StudySync to enhance their
+                        learning and teaching experience. Sign up for free and get started right away.
+                    </p>
+                    <a href="/register" class="btn btn-large btn-primary" data-aos="fade-up">Get Started Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="social-list" data-aos="fade-up">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-github"></i></a>
+</div>
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-logo">
+                    </div>
+                    <p>A comprehensive learning management platform designed to streamline the educational experience for both students and educators.</p>
+                </div>
+                <div class="col-md-2">
+                    <h4 class="footer-heading">Platform</h4>
+                    <ul class="footer-menu">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#download">Get Started</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-menu">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="footer-heading">Subscribe</h4>
+                    <p>Stay updated with our latest features and announcements.</p>
+                    <form id="mc-form" action="#">
+                        <input type="email" name="email" placeholder="Your email address" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2025 StudySync. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Email subscription form handling
+    const subscribeForm = document.getElementById('mc-form');
+    const formMessage = document.createElement('div');
+    formMessage.className = 'form-message';
+    
+    if (subscribeForm) {
+        subscribeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[name="email"]').value;
+            
+            // Simulate API call to subscribe
+            formMessage.innerHTML = `<p class="success">Thanks for subscribing! We've sent a confirmation to ${email}.</p>`;
+            subscribeForm.appendChild(formMessage);
+            this.reset();
+            
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                formMessage.innerHTML = '';
+            }, 5000);
+        });
+    }
+</script>
+
+{% endblock content %}

@@ -1,0 +1,99 @@
+:root {
+  /* Primary Color Palette */
+  --primary-color: #F68121; /* Orange brand color */
+  --primary-light: #ff9a4d;
+  --primary-dark: #d86500;
+  
+  /* Secondary Color Palette */
+  --secondary-color: #2C3E50; /* Dark blue */
+  --secondary-light: #3e5570;
+  --secondary-dark: #1a2530;
+  
+  /* Accent Colors */
+  --accent-success: #28a745;
+  --accent-info: #17a2b8;
+  --accent-warning: #ffc107;
+  --accent-danger: #dc3545;
+  
+  /* Background Colors */
+  --bg-dark: #121212;
+  --bg-medium: #242424;
+  --bg-light: #f8f9fa;
+  --bg-gradient: linear-gradient(135deg, var(--bg-dark), var(--secondary-dark));
+  --bg-gradient-primary: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+  
+  /* Text Colors */
+  --text-light: #ffffff;
+  --text-muted: #a0a0a0;
+  --text-dark: #212529;
+  
+  /* Structural Elements */
+  --border-radius-sm: 4px;
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+  --border-color: rgba(255, 255, 255, 0.1);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Typography */
+  --font-family-base: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-heading: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+  --font-family-code: 'Consolas', 'Monaco', 'Courier New', monospace;
+  
+  /* Font Sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.5rem;
+  
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Animation Speed */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+  
+  /* Z-index levels */
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+}
+
+/* Dark mode specific variables - applied automatically */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-body: var(--bg-dark);
+    --text-body: var(--text-light);
+    --border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Light mode specific variables - can be toggled with a 'light-mode' class */
+.light-mode {
+  --bg-body: var(--bg-light);
+  --text-body: var(--text-dark);
+  --border-color: rgba(0, 0, 0, 0.1);
+}

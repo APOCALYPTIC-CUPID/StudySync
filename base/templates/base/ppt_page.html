@@ -1,0 +1,390 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %} PPTs | StudySync {% endblock title %}
+{% block content %}
+<div class="main-container">
+    <section>
+      <div class="sidebar">
+        <input id="searchbar" onkeyup="search_course()" type="text" class="search" name="search" placeholder="Search Course.."> 
+        <div class="courses coursesview">
+          <ul id="course-items" style="list-style: none; margin: 0px;">
+           
+          </ul>
+        </div>
+      </div>
+    </section>
+    <div>
+      <div class="courseCode-top-container">
+        <h5 style="text-align: center;" id="top-coursecode"></h5>
+      </div>
+        <div id="files-view" class="content courses" style="padding-top: 15px;">
+          <!-- dynamic insert -->
+          </div>
+    </div>
+  </div>
+
+  <script>
+  const courseItems=document.getElementById('course-items');
+  const filesView=document.getElementById('files-view');
+  const noFileFound=`<div style="text-align: center; grid-column:2/span 2; grid-row: 2;"><img src="{% static 'images/hand.png' %}" alt="" width="150px" height="150px">
+                    <p>No files Found. Select another one.</p></div>`
+  const fileCard= `<div class="card">
+                    <img src="https://cdn3d.iconscout.com/3d/premium/thumb/pdf-file-5608815-4687430.png?f=webp" alt="" height="100px" width="100px">
+                    <div class="card-inside">
+                      <a class="card-anchor" href="{% url 'pdfview' %}?q=%FILE_ID%?t=" style="cursor: pointer;">
+                        <p>
+                          <h5>%FILE_TITLE%</h5>
+                          </p>
+                      </a>
+                        <p>Unit : %FILE_UNIT%</p>
+                        <p>Course Code : %FILE_COURSECODE%</p>
+                        <p>Date Uploaded : %FILE_UPLOADED%</p>
+                        <a href="%URL%" download="%FILE_TITLE%.pdf">Download</a>
+                      </div>
+                </div> `
+
+    const listItemEl=`<li data-courseId=%COURSE_CODE% class="course-card course-names" id="%COURSE_ID%"><h5>%COURSE_NAME%</h5></li>`;
+    
+    window.addEventListener('load',async()=>{
+      const coursesList=await fetch(`/get-courses`).then(res=>res.json()) ?? [];
+      courseItems.innerHTML='';
+      coursesList.forEach(course=>{
+        courseItems.insertAdjacentHTML('beforeEnd',listItemEl.replace('%COURSE_ID%',course.id).replace('%COURSE_CODE%',course.name).replace('%COURSE_NAME%',course.name));
+      });
+      // default card
+      const defaultCard = document.querySelector(`[data-courseId="${coursesList[0].name}"]`);
+      defaultCard.classList.add('default-card');
+      const defaultClick=document.querySelector('.default-card').click();
+
+      const downloadfilebtns=document.getElementsByClassName('downloadfile');
+      for(var i=0; i<downloadfilebtns.length; i++){
+        const btn=downloadfilebtns[i];
+        btn.addEventListener('click', async function(event){
+          event.preventDefault();
+        })
+      }
+    })
+    
+    
+
+    function search_course() { 
+      let input = document.getElementById('searchbar').value 
+      input=input.toUpperCase(); 
+      let x = document.getElementsByClassName('course-names'); 
+        
+      for (i = 0; i < x.length; i++) {  
+          if (!x[i].innerHTML.toUpperCase().includes(input)) { 
+              x[i].style.display="none"; 
+          } 
+          else { 
+              x[i].style.display="list-item";                  
+          } 
+      } 
+  } 
+
+  // 
+  
+  courseItems.addEventListener('click',async(event)=>{
+    const courseId=event.target.closest('[data-courseId]')?.dataset['courseid'];
+    courseItems.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+    const courseItem=event.target.closest('li');
+    courseItem.classList.add('active');
+    // set value on top coursecode
+    const courseCodeTop=document.getElementById("top-coursecode").innerHTML=event.target.innerHTML;
+    // remove filter of search bar
+    const searchbar=document.getElementById('searchbar').value="";
+    search_course();
+    const res= courseId ? await fetch(`/ppt-page?q=${courseId}`).then(res=>res.json()) : [];
+    filesView.innerHTML=''
+    res.forEach(file=>{
+      const card=fileCard.replaceAll('%FILE_TITLE%',file.title).replace('%FILE_UNIT%',file.unit)
+      .replace('%FILE_UPLOADED%',file.uploaded).replace('%URL%', file.url).replace('%FILE_ID%',file.id).replace('%FILE_COURSECODE%',file.coursecode);
+      filesView.insertAdjacentHTML('beforeEnd',card);
+      console.log(file.uploaded);
+      console.log(file.uploaded.url);
+    });
+
+    if(res.length===0){
+      filesView.insertAdjacentHTML('beforeEnd',noFileFound);
+    }
+    
+  })
+
+
+  </script>
+
+
+  <style>
+    *{
+      animation: 3s linear .1s ease-in;
+    }
+    body{
+      background-color: white;
+      overflow-y: hidden;
+    }
+    .content-top {
+        padding-top: 30px;
+        padding-bottom: 0px;
+        text-align: right;
+        width: 99%;
+    }
+    .content-top a{
+        margin-right: 5%;
+    }
+    #course-items{
+      background-color: transparent;
+    }
+    .card{
+        max-height: 300px;
+        border-radius: 15px;
+        padding: 10px;
+        width: 300px;
+        border: none;
+        box-shadow: 0px 0px 15px 0px #dfdddd;
+        display: grid;
+        grid-template-columns: 40% 60%;
+        /* background-image: linear-gradient(to top left, black , rgb(255, 140, 0)) */
+        /* cursor: pointer; */
+    }
+    .card:hover img{
+      scale: 105%;
+      transition: ease-in 0.2s;
+    }
+    .noCourse{
+      height: 80%;
+      padding: 50px 0px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar-collapse{
+      flex-grow: 0;
+    }
+    .container-fluid{
+      padding-right: 2%;
+    }
+    .form-css{
+      /* margin: 0px auto; */
+      margin-left: 5%;
+    }
+    .courseCode-top-container{
+      height: 5.5rem;
+      padding: 10px;
+      background-color: rgba(246,129,33,255);
+    }
+    .courseCode-top-container h5{
+      font-size: 2rem;
+    }
+    .content h5{
+      font-size: 12px;
+      font-weight: 400;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* Number of lines to show */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .content p{
+      font-size: 10px;
+    }
+    .content a{
+      font-size: 14px;
+      text-decoration: none;
+      color: rgba(246,129,33,255);
+    }
+    .main-container{
+      position: relative;
+      top: 72px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 15% 85%;
+    }
+    #coursename{
+      display: block;
+      font-size: 20px;
+      color: black;
+      background: rgba(246,129,33,255);
+      width: 100%;
+      text-align: center;
+      font-weight: 600;
+      padding: 5px;
+      margin-top: -16px;
+      position: sticky;
+      top: 0;
+    }
+
+    /* sidebar */
+    .sidebar{
+      height: fit-content;
+    }
+    .sidebar p{
+      padding-bottom: 30px;
+      width: 99%;
+    }
+    section a{
+      display: block;
+      color: black;
+      margin: 5px 0px;
+    }
+    /* sidebar */
+    .searchbar{
+        width: 100%;
+        display: flex;
+    }
+    .fa{
+        padding: 0px 10px;
+    }
+    .search{
+      position: sticky;
+      padding: 10px !important;
+      top: 0px;
+      background: white !important;
+      width: 100%;
+      height: 5.5rem !important;
+      border: 1px solid !important;
+      border-radius: 0px !important;
+      border-color: rgba(246,129,33,255) !important;
+      border-right: 7px solid rgba(246,129,33,255) !important;
+    }
+    .course-card{
+        border: 1px solid #b6b6b6;
+        padding: 10px 20px;
+        width: 100%;
+        border-radius: 10px;
+        display: block;
+        margin: 5px 0px;
+        margin-right: 20px;
+        /* box-shadow: 0px 0px 15px 0px #c7c7c7; */
+    }
+    .active{
+      transition: ease 0.2s;
+      color: white;
+      background-color: rgba(246,129,33,255);
+    }
+    .course-card p{
+        text-decoration: none;
+        font-weight: 600;
+        margin-bottom: 0px;
+    }
+    ol{
+      margin: 0px;
+      padding: 0px;
+    }
+    .courses{
+        overflow-y: scroll;
+        position: relative;
+        height: 84vh;
+        padding: 0px 10px 4px 10px;
+    }
+    .content{
+      overflow-x: hidden;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-rows: 0fr;
+      gap: 15px;
+      row-gap: 15px;
+      width: 100%;
+    }
+    /* .courses2{
+      min-height: 462px;
+    } */
+
+
+    /* scroller */
+
+    div ::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    /* Track */
+    div ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px #b6b6b6; 
+        /* border-radius: 10px; */
+        margin: 10% 0%;
+    }
+    
+    /* Handle */
+    div ::-webkit-scrollbar-thumb {
+        background: rgba(246,129,33,255); 
+        /* border-radius: 10px; */
+    }
+
+    /* Handle on hover */
+    div ::-webkit-scrollbar-thumb:hover {
+        background: rgba(246,129,33,255); 
+    }
+    .div ::-webkit-scrollbar-track-piece:end {
+        background: transparent;
+        margin-bottom: 10px; 
+    }
+
+    .div ::-webkit-scrollbar-track-piece:start {
+        background: transparent;
+        margin-top: 10px;
+    }
+
+    /* button css */
+    .front {
+      will-change: transform;
+      transition: transform 250ms;
+    }
+
+    .pushable:hover .front {
+      transform: translateY(-6px);
+    }
+    
+    .pushable:active .front {
+      transform: translateY(-2px);
+    }
+    .pushable {
+      background: hsl(340deg 100% 32%);
+      border: none;
+      border-radius: 12px;
+      margin-right: 4%;
+      padding: 0;
+      cursor: pointer;
+    }
+    .front {
+      display: block;
+      padding: 1px 10px;
+      border-radius: 12px;
+      font-size: 16px;
+      background: hsl(345deg 100% 47%);
+      color: white;
+      transform: translateY(-4px);
+    }
+
+    .pushable:focus:not(:focus-visible) {
+      outline: none;
+    }
+    p span{
+      display: none;
+    }
+
+    @media screen and (min-width:320px) and ( max-width: 750px ) {
+        .main-container{
+          display: block;
+        }
+        .coursesview{
+          height: 23.5vh;
+        }
+        .content{
+          grid-template-columns: auto;
+        }
+        .content div{
+          grid-column: auto !important;
+        }
+        .card{
+          margin: auto;
+        }
+        .sidebar{
+          width: 90%;
+          margin: 10px auto;
+        }
+    }
+  </style>
+
+
+{% endblock content %}

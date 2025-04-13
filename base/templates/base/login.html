@@ -1,0 +1,145 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+    <title>Login | StudySync</title>
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'css/login_signup.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="back-box box1"></div>
+        <div class="back-box box2"></div>
+        <div id="particleGenerator"></div>
+        <form id="userForm" style="text-align: center; padding: 10px 20px 0px; background: transparent; margin: 0px auto;">
+            <p class="login">Login</p>
+            <p>
+                <input type="username" id="username" name="username" placeholder="" required>
+                <label for="username"><span>Username</span></label>
+            </p>
+            <p>
+                <input type="password" id="password" name="password" placeholder="" required>
+                <label for="password"><span>Password</span></label>
+            </p>
+            
+            <div style="display: flex; width: 100%; align-items: baseline; justify-content: space-between; margin-top: 10px;">
+                <button type="submit" style="width: 100%;" class="btn" id="login-btn">Login</button>
+            </div>
+            
+            <p style="text-align: left; margin: 10px 10px;">Don't have an account? <a href="/register">Sign Up</a></p>
+        </form>
+        {% load socialaccount %}
+        <div class="signup-options" id="google-sign-in-button">
+            <p style="margin: 0px 15px 10px;" class="backline"><span style="background-color: rgba(255, 255, 255, 0.8); padding: 0px 8px; border-radius: 10px;">Or continue with</span></p>
+            <a href="{% provider_login_url 'google' %}?next=/" style="display: inline-block; color: white; margin-bottom: 10px;">
+                <img src="/static/images/google-icon.png" width="20px" style="margin-bottom: 0;" class="image-container">
+            </a>
+        </div>
+    </div>
+    
+    <!-- snackbar -->
+    <!-- The actual snackbar -->
+    <div id="snackbar">
+        <span id="snackbar-text"></span>
+    </div>
+
+    <!-- Snackbar -->
+    <script src="{% static '/js/snackbar.js' %}" async defer></script>
+    <link rel="stylesheet" href="{% static '/css/snackbar.css' %}">
+</body>
+</html>
+
+<!-- particles javascript -->
+<script>
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    function particlesInit() {
+        var generator = document.getElementById("particleGenerator");
+        var particleCount = 200;
+        for (var i = 0; i < particleCount; i++) {
+            var size = getRandomInt(2, 6);
+            var n = '<div class="particle" style="top:' + getRandomInt(15, 95) + '%; left:' + getRandomInt(5,95) + '%; width:'
+            + size + 'px; height:' + size + 'px; animation-delay:' + (getRandomInt(0,30)/10) + 's; background-color:rgba(246,129,33,0.7);"></div>';
+            var node = document.createElement("div");
+            node.innerHTML = n;
+            generator.appendChild(node);
+        }
+    }
+
+    particlesInit();
+</script>
+
+<script>
+    window.addEventListener('load', function(){
+       
+        // fetch form reference for animate while error occurs
+        let formRef=document.getElementById("userForm");
+        
+        
+        // prevent default forms
+        // prevent refresh on submit
+        // form1
+        function handleForm(event) { event.preventDefault(); } 
+        formRef.addEventListener('submit', handleForm);
+
+        const loginBtn=document.getElementById('login-btn');
+        loginBtn.addEventListener('click', async function(){
+            var data = new FormData()
+            var username=document.getElementById('username').value
+            var password=document.getElementById('password').value
+            data.append('username', username)
+            data.append('password', password)
+            if(username.length==0){
+                showFailSnackbar("Please fill in the username","fail")
+                return false;
+            }else if(password.length==0){
+                showFailSnackbar("Please fill in the password","fail")
+                return false;
+            }else{
+                // send post request
+                const res=await fetch('/login/',{method:'POST', body: data,headers: {
+                    'X-CSRFToken': getCookie('csrftoken')}}).then(res=>res.json())??[];
+                
+                // got response
+                if(res[0].result=="success"){
+                    showSuccessSnackbar(res[0].response, res[0].result)
+                    formRef.reset()
+                    window.location.replace(res[0]['redirect'])
+                }else{
+                    // error: got error message
+                    formRef.classList.add('error');
+                    showFailSnackbar(res[0].response, res[0].result)
+                    setTimeout(function(){
+                        formRef.classList.remove('error');
+                    }, 1000);
+                }
+            }
+        })
+
+    })
+
+    // get cookie
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
